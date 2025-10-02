@@ -2,7 +2,10 @@ import 'package:buyerapp/core/global_widget/custom_elevatedbuttom.dart';
 import 'package:buyerapp/core/global_widget/custom_text.dart';
 import 'package:buyerapp/core/utils/app_colors.dart';
 import 'package:buyerapp/core/utils/assetpaths.dart';
+import 'package:buyerapp/feature/auth/screen/address_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 class LocationScreen extends StatelessWidget {
   const LocationScreen({super.key});
@@ -50,7 +53,9 @@ class LocationScreen extends StatelessWidget {
                 width: 207,
                 child: CustomElevatedButtom(
                   text: "ALLOW LOCATION",
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => AddressScreen());
+                  },
                 ),
               ),
             ],
