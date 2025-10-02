@@ -2,20 +2,19 @@ import 'package:buyerapp/core/global_widget/custom_text.dart';
 import 'package:buyerapp/core/global_widget/custom_textfield.dart';
 import 'package:buyerapp/core/utils/app_colors.dart';
 import 'package:buyerapp/feature/auth/controller/controller.dart';
-import 'package:buyerapp/feature/auth/controller/dropdown_Controller.dart';
+import 'package:buyerapp/feature/auth/controller/dropdown_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:intl_phone_field/intl_phone_field.dart' show IntlPhoneField;
 
 class AddressScreen extends StatelessWidget {
-  final DropdownController controller = Get.put(DropdownController());
+  final DropdownController dropdownController = Get.put(DropdownController());
 
   AddressScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final PhoneController controller = Get.put(PhoneController());
+    final PhoneController phoneController = Get.put(PhoneController());
     return Scaffold(
       appBar: AppBar(
         title: CustomTextPoppins(
@@ -24,7 +23,6 @@ class AddressScreen extends StatelessWidget {
           fontWeight: FontWeight.w600,
         ),
       ),
-
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -35,23 +33,23 @@ class AddressScreen extends StatelessWidget {
               size: 14,
               fontWeight: FontWeight.w500,
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             CustomTextfield(hintText: "Andrew Ainsley"),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             CustomTextPoppins(
               text: "Email",
               size: 14,
               fontWeight: FontWeight.w500,
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             CustomTextfield(hintText: "abcd@gmail.com"),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             CustomTextPoppins(
               text: "Number",
               size: 14,
               fontWeight: FontWeight.w500,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             IntlPhoneField(
               decoration: InputDecoration(
                 hintText: " +966 4578 9654",
@@ -75,35 +73,36 @@ class AddressScreen extends StatelessWidget {
               ),
               initialCountryCode: 'BD',
               onChanged: (phone) {
-                controller.setPhone(phone.completeNumber);
+                phoneController.setPhone(phone.completeNumber);
               },
             ),
+            const SizedBox(height: 16),
             CustomTextPoppins(
               text: "Address ",
               size: 14,
               fontWeight: FontWeight.w500,
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             CustomTextfield(hintText: "Type Address"),
-
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             CustomTextPoppins(
               text: "Shop Opening Time",
               size: 14,
               fontWeight: FontWeight.w500,
             ),
-            SizedBox(height: 6),
+            const SizedBox(height: 6),
             Obx(
               () => DropdownButton<String>(
-                value: DropdownController().selectedItem.value,
-                items: DropdownController().items.map((String item) {
+                isExpanded: true, // Makes the dropdown take full width
+                value: dropdownController.selectedItem.value,
+                items: dropdownController.items.map((String item) {
                   return DropdownMenuItem<String>(
                     value: item,
                     child: Text(item),
                   );
                 }).toList(),
                 onChanged: (String? newValue) {
-                  DropdownController().setSelectedItem(newValue);
+                  dropdownController.setSelectedItem(newValue);
                 },
               ),
             ),
