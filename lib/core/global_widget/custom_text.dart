@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextPoppins extends StatelessWidget {
@@ -7,13 +8,14 @@ class CustomTextPoppins extends StatelessWidget {
   final double? size;
   final FontWeight? fontWeight;
   final TextAlign? textAlign;
+  final OnTap? onTap;
   const CustomTextPoppins({
     super.key,
     required this.text,
     this.color,
     this.size,
     this.fontWeight,
-    this.textAlign,
+    this.textAlign, this.onTap,
   });
 
   @override

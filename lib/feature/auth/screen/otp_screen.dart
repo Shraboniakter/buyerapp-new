@@ -1,24 +1,56 @@
+import 'dart:async';
+
 import 'package:buyerapp/core/global_widget/custom_elevatedbuttom.dart';
 import 'package:buyerapp/core/global_widget/custom_text.dart';
 import 'package:buyerapp/core/utils/app_colors.dart';
-import 'package:buyerapp/feature/auth/controller/otp_controller.dart';
 import 'package:buyerapp/feature/auth/screen/location_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
+  const OtpScreen({super.key});
+
+  @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
+  Timer? _timer;
+  int _start = 59;
+
+  void _startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(oneSec, (Timer timer) {
+      if (_start == 0) {
+        timer.cancel();
+      } else {
+        setState(() {
+          _start--;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final OTPController controller = Get.put(OTPController());
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
+          onPressed: () => Get.back(),
           icon: Icon(Icons.arrow_back),
         ),
         automaticallyImplyLeading: false,
@@ -83,17 +115,28 @@ class OtpScreen extends StatelessWidget {
                       color: AppColors.grey,
                       fontWeight: FontWeight.w400,
                     ),
-                    CustomTextPoppins(
-                      text: "Resend code",
-                      size: 14,
-                      color: AppColors.black,
-                      fontWeight: FontWeight.w500,
+                    GestureDetector(
+                      onTap: () {
+                        if (_start == 0) {
+                          setState(() {
+                            _start = 60;
+                            _startTimer();
+                          });
+                        }
+                      },
+                      child: CustomTextPoppins(
+                        text: "Resend code",
+                        size: 14,
+                        color: _start !=0 ? AppColors.grey : AppColors.black,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ],
                 ),
                 SizedBox(height: 8),
                 CustomTextPoppins(
-                  text: "Resend code at 00:59",
+                  text:
+                      "Resend code at 00:${_start.toString().padLeft(2, '0')}",
                   size: 14,
                   color: AppColors.black,
                   fontWeight: FontWeight.w400,
