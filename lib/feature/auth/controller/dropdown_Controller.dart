@@ -1,15 +1,13 @@
 import 'package:get/get.dart';
 
+// Controller
 class DropdownController extends GetxController {
-  final RxString selectedItem = '7AM'.obs; // Changed to match items list
-  final List<String> items = ['7AM', '8AM', '9AM'];
+  var items = ["6AM", "7AM", "8AM", "9AM"].obs;
+  var selectedItem = "6AM".obs;
 
-  String get selectedItemValue =>
-      selectedItem.value; // Fixed typo in getter name
-
-  void setSelectedItem(String? newValue) {
-    if (newValue != null) {
-      selectedItem.value = newValue;
+  void setSelectedItem(String? value) {
+    if (value != null) {
+      selectedItem.value = value;
     }
   }
 }
