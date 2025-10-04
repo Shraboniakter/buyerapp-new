@@ -3,6 +3,7 @@ import 'package:buyerapp/core/global_widget/custom_text.dart';
 import 'package:buyerapp/core/global_widget/custom_textfield.dart';
 import 'package:buyerapp/core/utils/app_colors.dart';
 import 'package:buyerapp/feature/auth/controller/controller.dart';
+import 'package:buyerapp/feature/auth/controller/dialog_controller.dart';
 import 'package:buyerapp/feature/auth/controller/dropdown_controller.dart';
 import 'package:buyerapp/feature/auth/screen/location_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:intl_phone_field/intl_phone_field.dart' show IntlPhoneField;
 
 class AddressScreen extends StatelessWidget {
   final DropdownController dropdownController = Get.put(DropdownController());
+  final DialogController dialogController = Get.put(DialogController());
 
   AddressScreen({super.key});
 
@@ -149,7 +151,7 @@ class AddressScreen extends StatelessWidget {
                 child: CustomElevatedButtom(
                   text: "CONTINUE",
                   onTap: () {
-                    Get.to(() => LocationScreen());
+                      dialogController.showCustomDialog();
                   },
                 ),
               ),

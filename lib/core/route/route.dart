@@ -1,4 +1,5 @@
 import 'package:buyerapp/feature/auth/screen/address_screen.dart';
+
 import 'package:buyerapp/feature/auth/screen/location_screen.dart';
 import 'package:buyerapp/feature/auth/screen/otp_screen.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ class AppRoutes {
   static const String otp = '/otp';
   static const String location = '/location';
   static const String address = '/address';
+  static const String dialog = '/dialog';
 
   final List<GetPage> pages = [
     GetPage(name: splash, page: () => SplashScreen()),
@@ -18,5 +20,6 @@ class AppRoutes {
     GetPage(name: otp, page: () => OtpScreen()),
     GetPage(name: location, page: () => LocationScreen()),
     GetPage(name: address, page: () => AddressScreen()),
+    
   ];
 }
