@@ -5,4 +5,5 @@ class Assetpaths {
   static const String frame = 'assets/images/Frame.png';
   static const String frame2 = 'assets/images/Frame2.png';
   static const String group = 'assets/images/Group 33543.png';
+  static const String frame3 = 'assets/images/Frame 2147227213.png';
 }

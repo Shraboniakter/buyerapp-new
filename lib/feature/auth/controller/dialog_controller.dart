@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:buyerapp/core/utils/assetpaths.dart';
 
 class DialogController extends GetxController {
-  // ডায়ালগ দেখানোর ফাংশন
+ 
   void showCustomDialog() {
     Get.dialog(
       Dialog(
@@ -51,7 +51,11 @@ class DialogController extends GetxController {
           ),
         ),
       ),
-      barrierDismissible: true, // ডায়ালগের বাইরে ক্লিক করলে বন্ধ হবে
+      barrierDismissible: true, 
     );
+    Future.delayed(Duration(seconds: 4), () {
+      Get.back(); // Close the dialog
+      Get.offAllNamed('/homepageone'); // Navigate to home page
+    });
   }
 }
